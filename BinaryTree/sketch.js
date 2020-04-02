@@ -1,5 +1,13 @@
+let tree = null;
+
+function drawTree() {
+  let arr = [];
+  node = tree.node;
+
+}
+
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(600, 600);
   background(255, 255, 255);
 
   tree = new Tree();
@@ -15,9 +23,9 @@ function setup() {
   fill(255);
   stroke(0, 0, 0);
   textAlign(CENTER, CENTER);
-  textSize(10);
+  textSize(20);
   // textColor(0, 0, 0);
-  tree.display();
+  tree.display(40);
 
 }
 
