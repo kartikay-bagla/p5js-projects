@@ -85,7 +85,7 @@ class Population {
                     child[i].add(rand_vec);
                 }
             }
-            next_rockets.push(new Rocket(child));
+            next_rockets.push(new Rocket(child.slice(0)));
         }
         for (let index = 0; index < this.new_rand; index++) {
             next_rockets.push(new Rocket());
