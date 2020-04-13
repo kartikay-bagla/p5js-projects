@@ -2,6 +2,13 @@ var box1, box2;
 var timestep = 100000;
 var p;
 var prec = 1000000;
+var clack;
+var play_clack = false;
+var a, b, c;
+
+function preload() {
+  clack = loadSound('clack.wav');
+}
 
 function setup() {
   createCanvas(600, 600);
@@ -26,21 +33,30 @@ function mainsetup() {
 }
 
 function draw() {
+  play_clack = false;
   background(255);
   textSize(20);
   text("Precision: " + slider.value(), 400, 40)
   // p.value("Precision: " + slider.value())
   fill(255, 0, 0);
   for (let index = 0; index < timestep; index++) {
-    box1.collide(box2)
-    box1.update(timestep)
-    box2.update(timestep)
+    a = box1.collide(box2, clack)
+    b = box1.update(timestep, clack)
+    c = box2.update(timestep, clack)
+    if (a || b || c) {
+      play_clack = true;
+    }
   }
+  
   rectMode(CENTER);
   box1.display()
   box2.display()
   // rectMode(CORNER);
   fill(0);
-  textSize(50);
-  text(box1.collision / prec, 0, 50)
+  textSize(30);
+  text("Collisions: " + box1.collision, 0, 30)
+  if (play_clack) {
+    print("play")
+    clack.play();
+  }
 }

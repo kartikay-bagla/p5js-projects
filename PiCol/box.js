@@ -17,7 +17,9 @@ class Box {
         if (this.pos.x - this.w/2 < 0) {
             this.collision += 1;
             this.vel.mult(-1);
+            return true;
         }
+        return false;
     }
 
     collide(other) {
@@ -30,7 +32,9 @@ class Box {
             var new_vel2 = p5.Vector.add(p5.Vector.mult(other.vel, (other.m - this.m) / masses), p5.Vector.mult(this.vel, 2 * this.m / masses)); 
             this.vel = new_vel1;
             other.vel = new_vel2;
+            return true;
         }
+        return false
     }
 
     display() {
