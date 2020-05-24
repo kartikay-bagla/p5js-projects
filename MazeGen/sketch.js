@@ -1,27 +1,46 @@
 var cells = [];
-var w = 40;
+var h;
+var w;
 var neighbor;
 var neighbor;
 var current;
 var stack = [];
-
-function setup() {
-  createCanvas(400, 400);
-  // frameRate(20);
-  
-  for (var i = 0; i < w; i++) {
-    cells[i] = [];
-    for (var j = 0; j < w; j++) {
-      cells[i][j] = new Cell(i, j, 400 / w);
-    }
-  }
-}
-
-var i = 0, j = 0, t;
-
+var i, j, t;
 var next_i, next_j;
 
+function windowResized() {
+  setup()
+}
+
+function setup() {
+  var canvasDiv = document.getElementById('canvas');
+  var width = canvasDiv.offsetWidth;
+  var height = canvasDiv.offsetHeight;
+  var sketchCanvas = createCanvas(width,height);
+  sketchCanvas.style('z-index', -1);
+  sketchCanvas.position(0, 0);
+
+  w = 40;
+  var cell_width = int(width/w);
+  h = int(height / cell_width);
+  w++;
+  h++;
+  sketchCanvas.parent("canvas");
+  // frameRate(20);
+
+  for (var x = 0; x < w; x++) {
+    cells[x] = [];
+    for (var y = 0; y < h; y++) {
+      cells[x][y] = new Cell(x, y, cell_width);
+    }
+  }
+  
+  i = 0;
+  j = 0;
+}
+
 function draw() {
+  // print("loop")
   background(100);
   current = cells[i][j];
   current.visited = true;
@@ -64,7 +83,7 @@ function clearWalls(cells, i, j, ni, nj) {
 
 function show_all(cells) {
   for (var x = 0; x < w; x++) {
-    for (var y = 0; y < w; y++) {
+    for (var y = 0; y < h; y++) {
       cells[x][y].show();
     }
   }

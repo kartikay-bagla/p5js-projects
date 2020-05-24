@@ -27,7 +27,7 @@ class Cell {
       }
       
       
-      stroke(255);
+      stroke(128);
       if (this.walls[0]) {
         line(x, y, x + this.w, y);
       }
